@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 /* Dodawanie dwóch liczb całkowitych
@@ -44,4 +45,15 @@ void help(){
 void error(){
     cout<<"BŁĄD ARGUMENTÓW\n";
     help();
+}
+/* Przekształca przekazaną nazwę komendy na liczbę, zwraca 0 jeżeli komenda nie pasuje do listy
+ * @param command - nazwa komendy
+ */
+int commandSelecter(char* command){
+    if(!strcmp(command, "add")) return 1;
+    if(!strcmp(command, "subtract")) return 2;
+    if(!strcmp(command, "volume")) return 3;
+    if(!strcmp(command, "help")) return 4;
+
+    return 0;
 }
