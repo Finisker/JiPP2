@@ -4,6 +4,6 @@
 #include <lib.h>
 
 using namespace std;
-void itIsWork(){
+void isItWork(){
     cout<<"Yes it work!\n";
 }
