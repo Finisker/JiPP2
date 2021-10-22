@@ -79,11 +79,49 @@ int** transposeMatrix(int** matrix, int rowsNumber, int columnsNumber);
 int** transposeMatrix(double** matrix, int rowsNumber, int columnsNumber);
 
 /**
+ * Multiplies a matrix by itself "@param power" times
+ * @param matrix - matrix to multiply
+ * @param rowsNumber - number of rows of the matrix
+ * @param columnNumber - number of columns of the matrix
+ * @param power - number of times to multiply the matrix
+ */
+int** powerMatrix(int** matrix, int rowsNumber, int columnsNumber, unsigned power);
+double** powerMatrix(double** matrix, int rowsNumber, int columnsNumber, unsigned power);
+
+/**
+ * Calculates a determinant of the matrix
+ * @param matrix - matrix to calculate determinant from
+ * @param rowsNumber - number of rows of the matrix
+ * @param columnNumber - number of columns of the matrix
+ */
+int determinantMatrix(int** matrix, int rowsNumber, int columnsNumber);
+double determinantMatrix(double ** matrix, int rowsNumber, int columnsNumber);
+
+/**
+ * Finds if matrix is diagonal
+ * @param matrix - matrix to check if it is diagonal
+ * @param rowsNumber - number of rows of the matrix
+ * @param columnNumber - number of columns of the matrix
+ */
+bool matrixIsDiagonal(int** matrix, int rowsNumber, int columnsNumber);
+bool matrixIsDiagonal(double** matrix, int rowsNumber, int columnsNumber);
+
+/**
  * Swaps two numbers with each other
  * @param a - first number to swap
  * @param b - second number to swap
  */
 void swap(int &a, int &b);
 void swap(double &a, double &b);
+
+/**
+ * Sorts an array using bubble sort
+ * @param array - array to sort
+ * @param columnsNumber - number of elements in array
+ */
+void sortRow(int* array, int columnsNumber);
+void sortRow(double* array, int columnsNumber);
+
+//void sortRowsInMatrix(int** matrix, )
 
 #endif //JIPP2_LIB_H
