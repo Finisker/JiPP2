@@ -8,3 +8,5 @@ add_subdirectory(Lab2)
 
 add_subdirectory(matrixProject)
 
+add_subdirectory(Lab4)
+
