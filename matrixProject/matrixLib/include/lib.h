@@ -122,6 +122,26 @@ void swap(double &a, double &b);
 void sortRow(int* array, int columnsNumber);
 void sortRow(double* array, int columnsNumber);
 
-//void sortRowsInMatrix(int** matrix, )
+/**
+ * Sorts all rows of a matrix independently
+ * @param matrix - matrix to sort rows in
+ * @param rowsNumber - number of rows of the matrix
+ * @param columnNumber - number of columns of the matrix
+ */
+void sortRowsInMatrix(int** matrix, int rowsNumber, int columnsNumber);
+void sortRowsInMatrix(double** matrix, int rowsNumber, int columnsNumber);
+
+/**
+ * Prints documentation on standard output
+ */
+void help();
+
+/**
+ * Creates matrix from standard input
+ * @param rowsNumber - number of rows of the matrix
+ * @param columnNumber - number of columns of the matrix
+ */
+int** createIntMatrix(int rowsNumber, int columnsNumber);
+double** createDoubleMatrix(int rowsNumber, int columnsNumber);
 
 #endif //JIPP2_LIB_H

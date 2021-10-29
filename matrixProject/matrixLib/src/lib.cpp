@@ -4,6 +4,7 @@
 
 #include "iostream"
 #include "cmath"
+#include "string.h"
 using namespace std;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -479,4 +480,86 @@ void sortRow(double* array, int columnsNumber){
             if(array[j-1]>array[j])
                 swap(array[j-1], array[j]);
 
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void sortRowsInMatrix(int** matrix, int rowsNumber, int columnsNumber){
+    for(int row=0;row<rowsNumber;++row){
+        sortRow(matrix[row],columnsNumber);
+    }
+}
+void sortRowsInMatrix(double** matrix, int rowsNumber, int columnsNumber){
+    for(int row=0;row<rowsNumber;++row){
+        sortRow(matrix[row],columnsNumber);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void help();
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int** createIntMatrix(int rowsNumber, int columnsNumber){
+    auto** finalMatrix = new int*[rowsNumber];
+    string tmp;
+    cout<<"Podaj wartości do macierzy\n"
+          "Pamiętaj aby wpisywać tylko liczby całkowite\n"
+          "oraz wpisac "<<rowsNumber*columnsNumber<<" liczb\n";
+
+    for(int row=0;row<rowsNumber;++row){
+        finalMatrix[row]=new int[columnsNumber];
+        for(int column=0;column<columnsNumber;++column){
+            cin>>tmp;
+            int size = tmp.size();
+            int wrongTmp=0;
+            for(int i=0;i<size;++i){
+                if(!isdigit(tmp[i])){
+                    cout<<"Podano nieprawidłową wartość\n"
+                          "Proszę podać wartość ponownie\n";
+                    column--;
+                    wrongTmp=1;
+                    break;
+                }
+            }
+
+            if(wrongTmp==0){
+                finalMatrix[row][column]=stoi(tmp);
+            }
+        }
+    }
+
+    return finalMatrix;
+}
+double** createDoubleMatrix(int rowsNumber, int columnsNumber){
+    auto** finalMatrix = new double *[rowsNumber];
+    string tmp;
+    cout<<"Podaj wartości do macierzy\n"
+          "Pamiętaj aby wpisywać tylko liczby zmiennoprzecinkowe\n"
+          "oraz wpisac "<<rowsNumber*columnsNumber<<" liczb\n";
+
+    for(int row=0;row<rowsNumber;++row){
+        finalMatrix[row]=new double[columnsNumber];
+        for(int column=0;column<columnsNumber;++column){
+            cin>>tmp;
+            int size = tmp.size();
+            int wrongTmp=0;
+            for(int i=0;i<size;++i){
+                if(!isdigit(tmp[i]) && tmp[i]!='.'){
+                    cout<<"Podano nieprawidłową wartość\n"
+                          "Proszę podać wartość ponownie\n";
+                    column--;
+                    wrongTmp=1;
+                    break;
+                }
+            }
+
+            if(wrongTmp==0){
+                finalMatrix[row][column]=stod(tmp);
+            }
+        }
+    }
+
+    return finalMatrix;
 }
