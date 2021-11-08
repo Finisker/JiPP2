@@ -6,7 +6,7 @@ add_subdirectory(Lab1)
 
 add_subdirectory(Lab2)
 
-add_subdirectory(matrixProject)
+add_subdirectory("matrixProject(unfinished)")
 
-add_subdirectory(Lab4)
+#add_subdirectory(Lab4)
 

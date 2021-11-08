@@ -4,8 +4,9 @@
 
 #include "iostream"
 #include "cmath"
-#include "string.h"
+#include "lib.h"
 using namespace std;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void deleteMatrix(int** matrix, int rowsNumber){
@@ -294,87 +295,97 @@ double ** transposeMatrix(double** matrix, int rowsNumber, int columnsNumber){
 
 
 int** powerMatrix(int** matrix, int rowsNumber, int columnsNumber, unsigned power){
-
     auto** finalMatrix = new int*[rowsNumber];
-    auto** powersMatrix = new int*[rowsNumber];
-    int** temporaryMatrix;
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new int[columnsNumber];
-        powersMatrix[row]=new int[columnsNumber];
-        for(int column=0; column<columnsNumber;++column){
-            if(row==column){
-                finalMatrix[row][column]=1;
+    if(power==0){
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new int[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                if(row==column){
+                    finalMatrix[row][column]=1;
+                }
+                else{
+                    finalMatrix[row][column]=0;
+                }
             }
-            else{
-                finalMatrix[row][column]=0;
-            }
-
-            powersMatrix[row][column] = matrix[row][column];
         }
     }
+    else if(power==1){
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new int[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                finalMatrix[row][column]=matrix[row][column];
+            }
+        }
+    }
+    else{
+        int** tmpMatrix;
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new int[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                finalMatrix[row][column] = matrix[row][column];
+            }
+        }
 
-    while(power>0){
-        if(power%2 == 1){
-            temporaryMatrix = multiplyMatrix(finalMatrix,matrix, rowsNumber, columnsNumber, columnsNumber);
+        for(int i=0; i<power-1; ++i){
+            tmpMatrix = multiplyMatrix(finalMatrix,matrix,rowsNumber,columnsNumber,columnsNumber);
             deleteMatrix(finalMatrix,rowsNumber);
-            finalMatrix=temporaryMatrix;
+            finalMatrix = tmpMatrix;
         }
-
-        temporaryMatrix = multiplyMatrix(powersMatrix,powersMatrix,rowsNumber,columnsNumber,columnsNumber);
-        deleteMatrix(powersMatrix,rowsNumber);
-        powersMatrix = temporaryMatrix;
-        power/=2;
     }
 
-    deleteMatrix(powersMatrix,rowsNumber);
     return finalMatrix;
 }
 double** powerMatrix(double** matrix, int rowsNumber, int columnsNumber, unsigned power){
-
     auto** finalMatrix = new double*[rowsNumber];
-    auto** powersMatrix = new double*[rowsNumber];
-    double** temporaryMatrix;
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double[columnsNumber];
-        powersMatrix[row]=new double[columnsNumber];
-        for(int column=0; column<columnsNumber;++column){
-            if(row==column){
-                finalMatrix[row][column]=1;
+    if(power==0){
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new double[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                if(row==column){
+                    finalMatrix[row][column]=1;
+                }
+                else{
+                    finalMatrix[row][column]=0;
+                }
             }
-            else{
-                finalMatrix[row][column]=0;
-            }
-
-            powersMatrix[row][column] = matrix[row][column];
         }
     }
+    else if(power==1){
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new double[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                finalMatrix[row][column]=matrix[row][column];
+            }
+        }
+    }
+    else{
+        double** tmpMatrix;
+        for(int row=0;row<rowsNumber;++row){
+            finalMatrix[row]=new double[columnsNumber];
+            for(int column=0;column<columnsNumber;++column){
+                finalMatrix[row][column] = matrix[row][column];
+            }
+        }
 
-    while(power>0){
-        if(power%2 == 1){
-            temporaryMatrix = multiplyMatrix(finalMatrix,matrix, rowsNumber, columnsNumber, columnsNumber);
+        for(int i=0; i<power-1; ++i){
+            tmpMatrix = multiplyMatrix(finalMatrix,matrix,rowsNumber,columnsNumber,columnsNumber);
             deleteMatrix(finalMatrix,rowsNumber);
-            finalMatrix=temporaryMatrix;
+            finalMatrix = tmpMatrix;
         }
-
-        temporaryMatrix = multiplyMatrix(powersMatrix,powersMatrix,rowsNumber,columnsNumber,columnsNumber);
-        deleteMatrix(powersMatrix,rowsNumber);
-        powersMatrix = temporaryMatrix;
-        power/=2;
     }
 
-    deleteMatrix(powersMatrix,rowsNumber);
     return finalMatrix;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int determinantMatrix(int** matrix, int rowsNumber, int columnsNumber){
+double determinantMatrix(int** matrix, int rowsNumber, int columnsNumber){
 
     if(rowsNumber==1){
         return matrix[0][0];
     }
 
-    int determinant=0;
+    double determinant=0;
     auto** partMatrix = new int*[rowsNumber-1];
 
     for(int row=0; row<rowsNumber; ++row){
@@ -426,7 +437,7 @@ double determinantMatrix(double ** matrix, int rowsNumber, int columnsNumber){
 bool matrixIsDiagonal(int** matrix, int rowsNumber, int columnsNumber){
 
     for(int row=0; row<rowsNumber; ++row){
-        for(int column; column<columnsNumber;++column){
+        for(int column=0; column<columnsNumber;++column){
             if(row!=column && matrix[row][column]!=0){
                 return false;
             }
@@ -497,35 +508,28 @@ void sortRowsInMatrix(double** matrix, int rowsNumber, int columnsNumber){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void help();
+void help(){
+    cout<<"HELP\n";
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int** createIntMatrix(int rowsNumber, int columnsNumber){
+
     auto** finalMatrix = new int*[rowsNumber];
-    string tmp;
-    cout<<"Podaj wartości do macierzy\n"
-          "Pamiętaj aby wpisywać tylko liczby całkowite\n"
-          "oraz wpisac "<<rowsNumber*columnsNumber<<" liczb\n";
-
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new int[columnsNumber];
+    for(int row=0; row<rowsNumber;++row){
+        finalMatrix[row] = new int[columnsNumber];
         for(int column=0;column<columnsNumber;++column){
-            cin>>tmp;
-            int size = tmp.size();
-            int wrongTmp=0;
-            for(int i=0;i<size;++i){
-                if(!isdigit(tmp[i])){
-                    cout<<"Podano nieprawidłową wartość\n"
-                          "Proszę podać wartość ponownie\n";
-                    column--;
-                    wrongTmp=1;
-                    break;
-                }
+            string input;
+            cin>>input;
+            if(isNumber(input)){
+                finalMatrix[row][column]=stoi(input);
             }
-
-            if(wrongTmp==0){
-                finalMatrix[row][column]=stoi(tmp);
+            else{
+                cout<<"Podano złą wartość\n"
+                      "Proszę podać ją ponownie\n";
+                --column;
+                continue;
             }
         }
     }
@@ -534,32 +538,65 @@ int** createIntMatrix(int rowsNumber, int columnsNumber){
 }
 double** createDoubleMatrix(int rowsNumber, int columnsNumber){
     auto** finalMatrix = new double *[rowsNumber];
-    string tmp;
-    cout<<"Podaj wartości do macierzy\n"
-          "Pamiętaj aby wpisywać tylko liczby zmiennoprzecinkowe\n"
-          "oraz wpisac "<<rowsNumber*columnsNumber<<" liczb\n";
-
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double[columnsNumber];
+    for(int row=0; row<rowsNumber;++row){
+        finalMatrix[row] = new double [columnsNumber];
         for(int column=0;column<columnsNumber;++column){
-            cin>>tmp;
-            int size = tmp.size();
-            int wrongTmp=0;
-            for(int i=0;i<size;++i){
-                if(!isdigit(tmp[i]) && tmp[i]!='.'){
-                    cout<<"Podano nieprawidłową wartość\n"
-                          "Proszę podać wartość ponownie\n";
-                    column--;
-                    wrongTmp=1;
-                    break;
-                }
+            string input;
+            cin>>input;
+            if(isNumber(input)){
+                finalMatrix[row][column]=stod(input);
             }
-
-            if(wrongTmp==0){
-                finalMatrix[row][column]=stod(tmp);
+            else{
+                cout<<"Podano złą wartość\n"
+                      "Proszę podać ją ponownie\n";
+                --column;
+                continue;
             }
         }
     }
 
     return finalMatrix;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool isNumber(string str){
+    int size = str.size();
+    bool dot = false;
+    for(int i=0; i<size;++i){
+        if(!isdigit(str[i])){
+            if(str[i]=='.' && !dot && i!=0){
+                dot = true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int matrixDimension(){
+    string sDimension;
+    int dimension;
+    bool flag=true;
+    while(flag){
+        cin>>sDimension;
+        if(!isNumber(sDimension)){
+            cout<<"Podano zły wymiar macierzy\n"
+                  "Proszę podać go ponownie\n";
+            continue;
+        }
+        dimension=stoi(sDimension);
+        if(dimension<1){
+            cout<<"Podano zły wymiar macierzy\n"
+                  "Proszę podać go ponownie\n";
+            continue;
+        }
+        flag=false;
+    }
+
+    return dimension;
 }

@@ -5,6 +5,9 @@
 #ifndef JIPP2_LIB_H
 #define JIPP2_LIB_H
 
+#include "cstring"
+using namespace std;
+
 /**
  * Prints matrix on standard output in a 2D representation
  * @param Matrix - a matrix to print
@@ -76,7 +79,7 @@ double ** multiplyByScalar(double ** matrix,int rowsNumber, int columnsNumber, i
  * @param columnNumber - number of columns of the matrix
  */
 int** transposeMatrix(int** matrix, int rowsNumber, int columnsNumber);
-int** transposeMatrix(double** matrix, int rowsNumber, int columnsNumber);
+double** transposeMatrix(double** matrix, int rowsNumber, int columnsNumber);
 
 /**
  * Multiplies a matrix by itself "@param power" times
@@ -94,7 +97,7 @@ double** powerMatrix(double** matrix, int rowsNumber, int columnsNumber, unsigne
  * @param rowsNumber - number of rows of the matrix
  * @param columnNumber - number of columns of the matrix
  */
-int determinantMatrix(int** matrix, int rowsNumber, int columnsNumber);
+double determinantMatrix(int** matrix, int rowsNumber, int columnsNumber);
 double determinantMatrix(double ** matrix, int rowsNumber, int columnsNumber);
 
 /**
@@ -144,4 +147,14 @@ void help();
 int** createIntMatrix(int rowsNumber, int columnsNumber);
 double** createDoubleMatrix(int rowsNumber, int columnsNumber);
 
+/**
+ * Checks is given string is in double or integer format
+ * @param str - string to check
+ */
+bool isNumber(string str);
+
+/**
+ * Takes dimension of a matrix from standard input with care about letters
+ */
+int matrixDimension();
 #endif //JIPP2_LIB_H
