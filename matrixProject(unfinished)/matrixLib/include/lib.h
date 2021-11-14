@@ -34,8 +34,6 @@ void deleteMatrix(double** matrix, int rowsNumber);
  */
 int** addMatrix(int** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber);
 double** addMatrix(double** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber);
-double** addMatrix(double** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber);
-double** addMatrix(int** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber);
 
 /**
  * Subtracts one matrix form another
@@ -46,8 +44,6 @@ double** addMatrix(int** firstMatrix, double** secondMatrix, int rowsNumber, int
  */
 int** subtractMatrix(int** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber);
 double** subtractMatrix(double** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber);
-double** subtractMatrix(int** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber);
-double** subtractMatrix(double** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber);
 
 /**
  * Multiplies a matrix by another matrix
@@ -55,12 +51,10 @@ double** subtractMatrix(double** firstMatrix, int** secondMatrix, int rowsNumber
  * @param secondMatrix - right matrix of multiplication
  * @param firstMatrixRowsNumber - number of rows of the left matrix
  * @param firstMatrixColumnsNumber - number of columns of the left matrix
- * @param secondMatrixColumnsNumber - number of columns of the right
+ * @param secondMatrixColumnsNumber - number of columns of the right matrix
  */
 int** multiplyMatrix(int** firstMatrix, int** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber);
 double ** multiplyMatrix(double ** firstMatrix, double ** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber);
-double ** multiplyMatrix(int ** firstMatrix, double ** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber);
-double ** multiplyMatrix(double ** firstMatrix, int ** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber);
 
 /**
  * Multiplies a matrix by scalar
@@ -70,7 +64,7 @@ double ** multiplyMatrix(double ** firstMatrix, int ** secondMatrix, int firstMa
  * @param scalar - number by which we multiply the matrix
  */
 int** multiplyByScalar(int** matrix,int rowsNumber, int columnsNumber, int scalar);
-double ** multiplyByScalar(double ** matrix,int rowsNumber, int columnsNumber, int scalar);
+double ** multiplyByScalar(double ** matrix,int rowsNumber, int columnsNumber, double scalar);
 
 /**
  * Transposes the matrix (flips a matrix over its diagonal)

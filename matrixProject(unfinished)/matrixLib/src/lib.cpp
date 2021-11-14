@@ -77,34 +77,6 @@ double** addMatrix(double** firstMatrix, double** secondMatrix, int rowsNumber, 
 
     return finalMatrix;
 }
-double** addMatrix(double** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber){
-
-    auto** finalMatrix = new double *[rowsNumber];
-
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double [columnsNumber];
-
-        for(int column=0; column<columnsNumber;++column){
-            finalMatrix[row][column] = firstMatrix[row][column] + secondMatrix[row][column];
-        }
-    }
-
-    return finalMatrix;
-}
-double** addMatrix(int** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber){
-
-    auto** finalMatrix = new double *[rowsNumber];
-
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double [columnsNumber];
-
-        for(int column=0; column<columnsNumber;++column){
-            finalMatrix[row][column] = firstMatrix[row][column] + secondMatrix[row][column];
-        }
-    }
-
-    return finalMatrix;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -121,30 +93,6 @@ int** subtractMatrix(int** firstMatrix, int** secondMatrix, int rowsNumber, int 
     return finalMatrix;
 }
 double** subtractMatrix(double** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber){
-    auto** finalMatrix = new double *[rowsNumber];
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double [columnsNumber];
-
-        for(int column=0; column<columnsNumber;++column){
-            finalMatrix[row][column] = firstMatrix[row][column] - secondMatrix[row][column];
-        }
-    }
-
-    return finalMatrix;
-}
-double** subtractMatrix(int** firstMatrix, double** secondMatrix, int rowsNumber, int columnsNumber){
-    auto** finalMatrix = new double *[rowsNumber];
-    for(int row=0;row<rowsNumber;++row){
-        finalMatrix[row]=new double [columnsNumber];
-
-        for(int column=0; column<columnsNumber;++column){
-            finalMatrix[row][column] = firstMatrix[row][column] - secondMatrix[row][column];
-        }
-    }
-
-    return finalMatrix;
-}
-double** subtractMatrix(double** firstMatrix, int** secondMatrix, int rowsNumber, int columnsNumber){
     auto** finalMatrix = new double *[rowsNumber];
     for(int row=0;row<rowsNumber;++row){
         finalMatrix[row]=new double [columnsNumber];
@@ -197,44 +145,6 @@ double ** multiplyMatrix(double ** firstMatrix, double ** secondMatrix, int firs
 
     return finalMatrix;
 }
-double ** multiplyMatrix(int ** firstMatrix, double ** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber){
-    auto** finalMatrix = new double *[firstMatrixRowsNumber];
-
-    for(int row=0;row<firstMatrixRowsNumber;++row){
-        finalMatrix[row]=new double [secondMatrixColumnsNumber];
-
-        for(int column=0; column<secondMatrixColumnsNumber;++column){
-            double cellSum=0;
-
-            for(int i=0; i<firstMatrixColumnsNumber;++i){
-                cellSum+=firstMatrix[row][i]*secondMatrix[i][column];
-            }
-
-            finalMatrix[row][column]=cellSum;
-        }
-    }
-
-    return finalMatrix;
-}
-double ** multiplyMatrix(double ** firstMatrix, int ** secondMatrix, int firstMatrixRowsNumber, int firstMatrixColumnsNumber, int secondMatrixColumnsNumber){
-    auto** finalMatrix = new double *[firstMatrixRowsNumber];
-
-    for(int row=0;row<firstMatrixRowsNumber;++row){
-        finalMatrix[row]=new double [secondMatrixColumnsNumber];
-
-        for(int column=0; column<secondMatrixColumnsNumber;++column){
-            double cellSum=0;
-
-            for(int i=0; i<firstMatrixColumnsNumber;++i){
-                cellSum+=firstMatrix[row][i]*secondMatrix[i][column];
-            }
-
-            finalMatrix[row][column]=cellSum;
-        }
-    }
-
-    return finalMatrix;
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -250,7 +160,7 @@ int** multiplyByScalar(int** matrix,int rowsNumber, int columnsNumber, int scala
 
     return finalMatrix;
 }
-double ** multiplyByScalar(double ** matrix,int rowsNumber, int columnsNumber, int scalar){
+double ** multiplyByScalar(double ** matrix,int rowsNumber, int columnsNumber, double scalar){
     auto** finalMatrix = new double *[rowsNumber];
     for(int row=0;row<rowsNumber;++row){
         finalMatrix[row]=new double [columnsNumber];
