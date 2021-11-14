@@ -419,7 +419,23 @@ void sortRowsInMatrix(double** matrix, int rowsNumber, int columnsNumber){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void help(){
-    cout<<"HELP\n";
+    cout<<"Program wywołuje się podając jako parametr nazwę funkcjonalności którą ma wywołać.\n"
+          "W przypadku funkcjonalnści 'powerMatrix' należy podać również wykładnik potęgi jako drugi argument.\n"
+          "Następnie należy podać konieczne wymiary macierzy oraz wartości w macierzach na standardowym wejściu.\n"
+          "Program pyta o aktualnie potrzebne wartości\n"
+          "\n"
+          "Lista funkcjonalności: \n"
+          "help - wypisuje na ekran dokumentację\n"
+          "addMatrix - dodawanie dwóch macierzy\n"
+          "subtractMatrix - odejmowanie dwóch macierzy\n"
+          "multiplyMatrix - mnożenie dwóch macierzy\n"
+          "multiplyByScalar - mnożenie macierzy przez skalar\n"
+          "transpozeMatrix - transpozycja macierzy\n"
+          "powerMatrix x - potęgowanie macierzy, 'x' jest drugim argumentem oraz wartością wykładnika potęgi\n"
+          "determinantMatrix - obliczanie wyznacznika macierzy\n"
+          "matrixIsDiagonal - określenie czy macierz jest diagonalna\n"
+          "sortRow - sortowanie tablicy rosnąco\n"
+          "sortRowsInMatrix - sortowanie osobno wszystkich wierszy macierzy rosnąco\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
