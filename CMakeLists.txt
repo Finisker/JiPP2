@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 #add_subdirectory(Lab5)
 
-add_subdirectory("matrixProject(unfinished)")
+add_subdirectory(matrixProject)
+
+add_subdirectory(Lab6)
 
 #add_subdirectory(Lab4)
 
