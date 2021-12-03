@@ -12,7 +12,7 @@ private:
     string content;
 public:
     string getContent() override;
-    void setContent(string) override;
+    void setContent(string input) override;
 };
 
 
