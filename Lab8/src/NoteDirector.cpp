@@ -4,14 +4,14 @@
 
 #include "../include/NoteDirector.h"
 
-void NoteDirector::addNote(Note* note) {
+void NoteDirector::addNote(Note *note) {
     this->notesList.push_back(note);
 }
 
-void NoteDirector::addNote(const string& title, const string& content, int type) {
-    switch(type){
+void NoteDirector::addNote(const string &title, const string &content, int type) {
+    switch (type) {
         case TEXTNOTE: {
-            auto * newTextNote = new TextNote;
+            auto *newTextNote = new TextNote;
             newTextNote->setTitle(title);
             newTextNote->setContent(content);
             notesList.push_back(newTextNote);
@@ -30,9 +30,9 @@ void NoteDirector::addNote(const string& title, const string& content, int type)
 
 void NoteDirector::deleteNote(int index) {
     int n = this->notesList.size();
-    delete(this->notesList[index]);
-    for(int i=index;i<n-1;++i){
-        this->notesList[i]=this->notesList[i+1];
+    delete (this->notesList[index]);
+    for (int i = index; i < n - 1; ++i) {
+        this->notesList[i] = this->notesList[i + 1];
     }
     this->notesList.pop_back();
 }
@@ -51,11 +51,11 @@ NoteDirector::~NoteDirector() {
 
 void NoteDirector::printNotes() {
     int n = this->notesList.size();
-    for(int i=0; i<n;++i){
-        cout<<i<<". "<<this->notesList[i]->getTitle()<<endl<<this->notesList[i]->getContent()<<endl;
+    for (int i = 0; i < n; ++i) {
+        cout << i << ". " << this->notesList[i]->getTitle() << endl << this->notesList[i]->getContent() << endl;
     }
 }
 
 void NoteDirector::printNote(int index) {
-    cout<<this->notesList[index]->getTitle()<<endl<<this->notesList[index]->getContent()<<endl;
+    cout << this->notesList[index]->getTitle() << endl << this->notesList[index]->getContent() << endl;
 }

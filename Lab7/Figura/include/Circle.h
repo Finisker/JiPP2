@@ -8,15 +8,19 @@
 #include "Figura.h"
 
 
-class Circle: public Figura{
+class Circle : public Figura {
 private:
     double r;
 
 public:
     Circle(string name, string colour, double r);
+
     double getR();
+
     void setR(double r);
+
     double getCircumference();
+
     double getArea();
 };
 

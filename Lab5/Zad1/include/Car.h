@@ -18,7 +18,7 @@ private:
     string name;
     string markAndType;
 
-    string* passengers = new string[seatsNumber];
+    string *passengers = new string[seatsNumber];
 
 public:
     Car(int registrationNumber, int seatsNumber, string name, string markAndType);

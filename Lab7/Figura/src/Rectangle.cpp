@@ -4,7 +4,7 @@
 
 #include "../include/Rectangle.h"
 
-Rectangle::Rectangle(string name, string colour, double a, double b) : a(a), b(b){
+Rectangle::Rectangle(string name, string colour, double a, double b) : a(a), b(b) {
     this->name = name;
     this->colour = colour;
 }
@@ -26,10 +26,10 @@ void Rectangle::setB(double b) {
 }
 
 double Rectangle::getCircumference() {
-    return 2*a + 2*b;
+    return 2 * a + 2 * b;
 }
 
 double Rectangle::getArea() {
-    return a*b;
+    return a * b;
 }
 

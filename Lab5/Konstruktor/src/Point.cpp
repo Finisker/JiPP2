@@ -51,7 +51,7 @@ const string &Point::getName() const {
     return name;
 }
 
-Point::~Point(){
+Point::~Point() {
     delete x;
     delete y;
 }
@@ -59,8 +59,8 @@ Point::~Point(){
 Point::Point(Point &point) {
     name = point.name;
 
-    x = new double ;
-    y = new double ;
+    x = new double;
+    y = new double;
     *x = *point.x;
     *y = *point.y;
 }

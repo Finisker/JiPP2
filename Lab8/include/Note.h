@@ -15,9 +15,12 @@ private:
 
 public:
     string getTitle();
+
     void setTitle(string);
-    virtual string getContent()=0;
-    virtual void setContent(string)=0;
+
+    virtual string getContent() = 0;
+
+    virtual void setContent(string) = 0;
 };
 
 

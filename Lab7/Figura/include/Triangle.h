@@ -7,7 +7,7 @@
 
 #include "Figura.h"
 
-class Triangle : public Figura{
+class Triangle : public Figura {
 private:
     double a;
     double b;
@@ -15,13 +15,21 @@ private:
 
 public:
     Triangle(string name, string colour, double a, double b, double c);
+
     double getA();
+
     double getB();
+
     double getC();
+
     void setA(double a);
+
     void setB(double b);
+
     void setC(double c);
+
     double getCircumference();
+
     double getArea();
 };
 

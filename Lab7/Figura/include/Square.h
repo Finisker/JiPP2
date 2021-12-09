@@ -7,16 +7,20 @@
 
 #include "Figura.h"
 
-class Square : public Figura{
+class Square : public Figura {
 private:
     double a;
 
 public:
 public:
     Square(string name, string colour, double a);
+
     double getA();
+
     void setA(double a);
+
     double getCircumference();
+
     double getArea();
 };
 

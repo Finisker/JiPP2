@@ -16,6 +16,7 @@ private:
 
 public:
     Node();
+
     Node(double x, double y);
 
     void display();

@@ -3,22 +3,22 @@
 //
 
 #include "../include/MyFirstClass.h"
- void MyFirstClass::readAnswear() {
-     cin>>answer;
+
+void MyFirstClass::readAnswear() {
+    cin >> answer;
 }
 
-void MyFirstClass::printQuestion(){
-    cout<<question<<endl;
+void MyFirstClass::printQuestion() {
+    cout << question << endl;
 };
 
-void MyFirstClass::askUser(){
+void MyFirstClass::askUser() {
     printQuestion();
     readAnswear();
 }
 
 MyFirstClass::MyFirstClass(string firstName, string secondName, string answear, string question, short points)
-: secondName(secondName), question(question), points(points), answer(answear)
-{
+        : secondName(secondName), question(question), points(points), answer(answear) {
     this->firstName = firstName;
 }
 
@@ -27,5 +27,5 @@ string MyFirstClass::getQuestion() {
 }
 
 void MyFirstClass::setPoints() {
-    this->points=points;
+    this->points = points;
 }

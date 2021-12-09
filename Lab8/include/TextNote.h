@@ -7,11 +7,12 @@
 
 #include "Note.h"
 
-class TextNote: public Note{
+class TextNote : public Note {
 private:
     string content;
 public:
     string getContent() override;
+
     void setContent(string input) override;
 };
 

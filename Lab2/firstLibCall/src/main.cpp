@@ -4,7 +4,7 @@
 
 #include "lib.h"
 
-int main(){
+int main() {
 
     isItWork();
 

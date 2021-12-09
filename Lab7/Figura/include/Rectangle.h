@@ -7,18 +7,24 @@
 
 #include "Figura.h"
 
-class Rectangle : public Figura{
+class Rectangle : public Figura {
 private:
     double a;
     double b;
 
 public:
     Rectangle(string name, string colour, double a, double b);
+
     double getA();
+
     double getB();
+
     void setA(double a);
+
     void setB(double b);
+
     double getCircumference();
+
     double getArea();
 };
 

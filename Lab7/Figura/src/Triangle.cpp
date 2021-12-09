@@ -4,7 +4,7 @@
 
 #include "../include/Triangle.h"
 
-Triangle::Triangle(string name, string colour, double a, double b, double c) : a(a), b(b), c(c){
+Triangle::Triangle(string name, string colour, double a, double b, double c) : a(a), b(b), c(c) {
     this->name = name;
     this->colour = colour;
 }
@@ -34,10 +34,10 @@ void Triangle::setC(double c) {
 }
 
 double Triangle::getCircumference() {
-    return a+b+c;
+    return a + b + c;
 }
 
 double Triangle::getArea() {
-    double p = (a+b+c)/2;
-    return sqrt(p*(p-a)*(p-b)*(p-c));
+    double p = (a + b + c) / 2;
+    return sqrt(p * (p - a) * (p - b) * (p - c));
 }

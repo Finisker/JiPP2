@@ -9,7 +9,7 @@ Node::Node() {
     y = 0;
 }
 
-Node::Node(double x, double y): x(x), y(y) {}
+Node::Node(double x, double y) : x(x), y(y) {}
 
 void Node::display() {
     cout << "x: " << x << "\ty: " << y << endl;
@@ -20,6 +20,6 @@ void Node::updateValue(double x, double y) {
     this->y = y;
 }
 
-double pointsDistance(Node a, Node b){
-    return sqrt(pow(a.x - b.x,2) + pow(a.y - b.y,2));
+double pointsDistance(Node a, Node b) {
+    return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }

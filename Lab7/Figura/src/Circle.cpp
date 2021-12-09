@@ -4,7 +4,7 @@
 
 #include "../include/Circle.h"
 
-Circle::Circle(string name, string colour, double r) : r(r){
+Circle::Circle(string name, string colour, double r) : r(r) {
     this->name = name;
     this->colour = colour;
 }
@@ -18,11 +18,11 @@ void Circle::setR(double r) {
 }
 
 double Circle::getCircumference() {
-    return 2*M_PI*r;
+    return 2 * M_PI * r;
 }
 
 double Circle::getArea() {
-    return pow(r,2)*M_PI;
+    return pow(r, 2) * M_PI;
 }
 
 

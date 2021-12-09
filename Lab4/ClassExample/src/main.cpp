@@ -4,9 +4,10 @@
 
 #include "iostream"
 #include "../include/MyFirstClass.h"
+
 using namespace std;
 
-int main(){
+int main() {
 
     //MyFirstClass tmp = MyFirstClass("Maciej","Plachta","Jest piękny i madry","Jaki jest?",100);
     //tmp.askUser();

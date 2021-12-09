@@ -8,11 +8,12 @@
 #include "Note.h"
 #include "vector"
 
-class ListNote: public Note {
+class ListNote : public Note {
 private:
     vector<string> content;
 public:
     string getContent() override;
+
     void setContent(string) override;
 };
 

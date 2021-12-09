@@ -18,6 +18,7 @@ protected:
 
 public:
     virtual double getCircumference() = 0;
+
     virtual double getArea() = 0;
 };
 

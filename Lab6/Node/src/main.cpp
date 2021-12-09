@@ -4,13 +4,13 @@
 
 #include "../include/Node.h"
 
-int main(){
+int main() {
 
-    Node a = Node(1,1);
-    Node b = Node(4,5);
+    Node a = Node(1, 1);
+    Node b = Node(4, 5);
     a.display();
     b.display();
-    cout<<pointsDistance(a,b);
+    cout << pointsDistance(a, b);
 
     return 0;
 }

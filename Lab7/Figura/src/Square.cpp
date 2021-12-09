@@ -4,7 +4,7 @@
 
 #include "../include/Square.h"
 
-Square::Square(string name, string colour, double a) : a(a){
+Square::Square(string name, string colour, double a) : a(a) {
     this->name = name;
     this->colour = colour;
 }
@@ -18,9 +18,9 @@ void Square::setA(double a) {
 }
 
 double Square::getCircumference() {
-    return 4*a;
+    return 4 * a;
 }
 
 double Square::getArea() {
-    return pow(a,2);
+    return pow(a, 2);
 }

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
 
@@ -17,17 +18,27 @@ private:
 
 public:
     Vector();
+
     Vector(double x, double y);
+
     double length();
+
     void print() const;
 
     Vector operator+(const Vector &rhs) const;
+
     Vector &operator+=(const Vector &rhs);
+
     Vector operator-(const Vector &rhs) const;
+
     Vector &operator-=(const Vector &rhs);
+
     Vector &operator!() const;
+
     double operator*(const Vector &rhs) const;
+
     Vector operator*(double rhs) const;
+
     bool operator==(const Vector &rhs) const;
 };
 
