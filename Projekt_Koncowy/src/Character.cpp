@@ -28,34 +28,75 @@ int Character::getLuck() const {
     return this->luck;
 }
 
+int Character::getGold() const {
+    return this->gold;
+}
+
+int Character::getMinDmg() const {
+    return this->minDmg;
+}
+
+int Character::getMaxDmg() const {
+    return this->maxDmg;
+}
+
 void Character::setMaxHP(int newMaxHP) {
-    this->maxHP=newMaxHP;
+    this->maxHP = newMaxHP;
 }
 
 void Character::setStrength(int newStrength) {
-    this->strength=newStrength;
+    this->strength = newStrength;
 }
 
 void Character::setDexterity(int newDexterity) {
-    this->dexterity=newDexterity;
+    this->dexterity = newDexterity;
 }
 
 void Character::setDefense(int newDefense) {
-    this->defense=newDefense;
+    this->defense = newDefense;
 }
 
 void Character::setLuck(int newLuck) {
-    this->luck=newLuck;
+    this->luck = newLuck;
 }
 
 void Character::setCurrentHP(int newCurrentHP) {
-    if(newCurrentHP>this->maxHP){
-        this->currentHP=this->maxHP;
+    if (newCurrentHP > this->maxHP) {
+        this->currentHP = this->maxHP;
+    } else {
+        this->currentHP = newCurrentHP;
     }
-    else if(newCurrentHP<=0){
-        die();
+}
+
+void Character::setGold(int newGold) {
+    this->gold = newGold;
+}
+
+void Character::setMinDmg(int newMinDmg) {
+    this->minDmg = newMinDmg;
+}
+
+void Character::setMaxDmg(int newMaxDmg) {
+    this->maxDmg = newMaxDmg;
+}
+
+int Character::critical() const {
+    int tmp = rand() % 100;
+    if (this->luck * 3 >= tmp) {
+        return 3;
     }
-    else{
-        this->currentHP=newCurrentHP;
+
+    return 1;
+}
+
+int Character::attack() {
+
+    int hit = rand() % 100;
+    if (this->dexterity * 5 < hit) {
+        return 0;
     }
+
+    int damage = rand() % (this->maxDmg - this->minDmg + 1) + this->minDmg;
+
+    return (damage + this->strength) * critical();
 }

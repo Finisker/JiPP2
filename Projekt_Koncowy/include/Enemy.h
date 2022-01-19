@@ -5,8 +5,24 @@
 #ifndef KONCOWY_ENEMY_H
 #define KONCOWY_ENEMY_H
 
+#include "Character.h"
 
-class Enemy {
+class Enemy : public Character {
+private:
+
+
+public:
+
+/**
+ * Standard getter
+ */
+
+
+/**
+ * Standard setter
+ */
+
+
 
 };
 
