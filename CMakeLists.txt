@@ -18,5 +18,7 @@ cmake_minimum_required(VERSION 3.16)
 
 #add_subdirectory(Lab9)
 
-add_subdirectory(Lab10)
+#add_subdirectory(Lab10)
+
+add_subdirectory(Projekt_Koncowy)
 
