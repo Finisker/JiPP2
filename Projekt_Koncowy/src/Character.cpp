@@ -4,6 +4,31 @@
 
 #include "../include/Character.h"
 
+#include <utility>
+
+Character::Character(string name, vector<int> statsVector) {
+
+    this->name = move(name);
+    this->gold = statsVector.back();
+    statsVector.pop_back();
+    this->maxDmg = statsVector.back();
+    statsVector.pop_back();
+    this->minDmg = statsVector.back();
+    statsVector.pop_back();
+    this->luck = statsVector.back();
+    statsVector.pop_back();
+    this->defense = statsVector.back();
+    statsVector.pop_back();
+    this->dexterity = statsVector.back();
+    statsVector.pop_back();
+    this->strength = statsVector.back();
+    statsVector.pop_back();
+    this->currentHP = statsVector.back();
+    statsVector.pop_back();
+    this->maxHP = statsVector.back();
+    statsVector.pop_back();
+}
+
 int Character::getMaxHP() const {
     return this->maxHP;
 }
@@ -38,6 +63,10 @@ int Character::getMinDmg() const {
 
 int Character::getMaxDmg() const {
     return this->maxDmg;
+}
+
+string Character::getName() const {
+    return this->name;
 }
 
 void Character::setMaxHP(int newMaxHP) {
@@ -80,23 +109,53 @@ void Character::setMaxDmg(int newMaxDmg) {
     this->maxDmg = newMaxDmg;
 }
 
-int Character::critical() const {
+int Character::criticalValue() const {
     int tmp = rand() % 100;
     if (this->luck * 3 >= tmp) {
         return 3;
     }
-
     return 1;
 }
 
-int Character::attack() {
-
-    int hit = rand() % 100;
-    if (this->dexterity * 5 < hit) {
+int Character::attack() const {
+    if(!attackHit()){
         return 0;
     }
 
     int damage = rand() % (this->maxDmg - this->minDmg + 1) + this->minDmg;
 
-    return (damage + this->strength) * critical();
+    return (damage + this->strength) * criticalValue();
 }
+
+bool Character::attackHit() const {
+    int tmp = rand() % 100;
+    if (this->dexterity * 5 >= tmp) {
+        return true;
+    }
+    return false;
+}
+
+bool Character::dodge() const {
+    int tmp = rand() % 100;
+    if (this->dexterity * 5 >= tmp) {
+        return true;
+    }
+    return false;
+}
+
+bool Character::getHit(int damage) {
+    if(!dodge()){
+        int damageTaken = damage - defense;
+        if(damageTaken>0){
+            if(damageTaken>=this->currentHP){
+                return true;
+            }
+            this->currentHP-=damageTaken;
+        }
+    }
+    return false;
+}
+
+
+
+

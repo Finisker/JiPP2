@@ -6,9 +6,14 @@
 #define KONCOWY_CHARACTER_H
 
 #include <cstdlib>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 class Character {
 private:
+    string name;
     int maxHP;
     int currentHP;
     int strength;
@@ -20,10 +25,17 @@ private:
     int gold;
 
 public:
+/**
+ * Constructor for Character class
+ * @param statArray array of 9 int elements representing each field of a Character class
+ */
+    Character(string name, vector<int> statsVector);
 
 /**
  * Standard getters
  */
+    string getName() const;
+
     int getMaxHP() const;
 
     int getCurrentHP() const;
@@ -70,13 +82,30 @@ public:
  * Checks for isCritical hit
  * @return critical multiplier
  */
-    int critical() const;
+    int criticalValue() const;
+/**
+ * Checks if attack hit
+ * @return true for hit, false for miss
+ */
+    bool attackHit() const;
 
 /**
  *  Calculates damage from attack
  * @return amount of damage taken by player
  */
-    int attack();
+    int attack() const;
+/**
+ * Checks if attack was dodged
+ * @return true for dodge, false for hit
+ */
+    bool dodge() const;
+
+/**
+ * Calculates damage taken
+ * @param damage - flat damage dealt
+ * @return true if character died after attack
+ */
+    bool getHit(int damage);
 };
 
 

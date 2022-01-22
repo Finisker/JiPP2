@@ -9,7 +9,7 @@ int Player::getMagic() const {
 }
 
 void Player::setMagic(int newMagic) {
-    this->magic=newMagic;
+    this->magic = newMagic;
 }
 
 void Player::die() {
@@ -17,5 +17,17 @@ void Player::die() {
 }
 
 void Player::heal() {
-    setCurrentHP(getCurrentHP()+getMaxHP()/4);
+    setCurrentHP(getCurrentHP() + getMaxHP() / 4);
+}
+
+Player::Player(string name,vector<int> statsVector, int magic) : Character(move(name),move(statsVector)) {
+    this->magic = magic;
+}
+
+string Player::getPlayerClass() const {
+    return this->playerClass;
+}
+
+void Player::setPlayerClass(string newPlayerClass) {
+    this->playerClass=move(newPlayerClass);
 }

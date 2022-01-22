@@ -7,19 +7,33 @@
 
 #include "Character.h"
 
+using namespace std;
+
 class Player : public Character {
 private:
+    string playerClass;
     int magic;
 public:
+
+/**
+ * Constructor for Player subclass
+ * @param statArray - array of 9 int elements representing each field of a Character class
+ * @param magic - int representing magic field of Player subclass
+ */
+    Player(string name,vector<int> statsVector, int magic);
+
 /**
  * Standard getters
  */
+    string getPlayerClass() const;
+
     int getMagic() const;
 
 /**
  * Standard setters
  */
     void setMagic(int newMagic);
+    void setPlayerClass(string newPlayerClass);
 
 /**
  * Triggers death event
