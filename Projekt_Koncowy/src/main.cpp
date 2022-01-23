@@ -7,6 +7,8 @@
 #include <cstdlib>
 #include <vector>
 #include <time.h>
+#include <algorithm>
+#include <fstream>
 #include "Character.h"
 #include "Player.h"
 
@@ -24,8 +26,14 @@ void play(Player* player);
 void showPlayer(Player* player);
 void shop(Player* player);
 void fight(Player* player);
+void saveToLeaderboard(const string& name);
 
 using namespace std;
+
+typedef struct Leaderboard{
+    string name;
+    int points;
+}leaderboardStruct;
 
 int magic, difficulty, scoreCount=0;
 string command, className;
@@ -41,19 +49,24 @@ int main(int argc, char *argv[]) {
     else{
         difficulty=1;
     }
+    while(true) {
+        menu();
+        if (command == "..end") return 0;
 
-    menu();
-    if(command=="..end") return 0;
-    string playerName;
-    cout<<"Give us your name: ";
-    getline(cin,playerName);
-    auto* player = new Player(playerName,stats,magic);
-    player->setPlayerClass(className);
+        string playerName;
+        cout << "Give us your name: ";
+        getline(cin, playerName);
+        auto *player = new Player(playerName, stats, magic);
+        player->setPlayerClass(className);
 
-    play(player);
-    clear();
-    cout<<"Congratulations your score was "<<scoreCount<<endl
-    <<"Your score will be forever saved in a leaderboard";
+        play(player);
+        clear();
+        cout << "Congratulations your score was " << scoreCount << endl
+             << "Your score will be forever saved in a leaderboard";
+        saveToLeaderboard(player->getName());
+        if (command == "..end") return 0;
+    }
+
     return 0;
 }
 /**
@@ -63,7 +76,7 @@ int main(int argc, char *argv[]) {
  */
 void clear(){
     //system("cls");
-    cout<<"------------------------------------------------------------"<<endl;
+    cout<<"\n------------------------------------------------------------\n"<<endl;
 
 }
 void menu(){
@@ -138,6 +151,13 @@ void options(){
 void leaderboard(){
     clear();
     cout<<"Leaderboard"<<endl;
+    cout<<"Name Score"<<endl;
+    string myLine;
+    ifstream myFile("E:\\test\\leaderboard.txt");
+    while(getline(myFile,myLine)){
+        cout<<myLine<<endl;
+    }
+    myFile.close();
     cout<<"Press enter to continue";
     getchar();
 }
@@ -427,7 +447,6 @@ void classStudent(){
         if(command=="..abort") break;
     }
 }
-
 void play(Player* player){
     while(true) {
         clear();
@@ -456,12 +475,12 @@ void play(Player* player){
                 shop(player);
                 break;
             case 4:
-                command="..abort";
+                command="..end";
                 break;
             default:
                 break;
         }
-        if(command=="..abort") break;
+        if(command=="..end") break;
     }
 
 
@@ -608,12 +627,12 @@ void fight(Player* player){
                 player->heal();
                 break;
             case 3:
-                command="..abort";
+                command="..end";
                 break;
             default:
                 break;
         }
-        if(command=="..abort") break;
+        if(command=="..end"||flag==1) break;
 
         damage = enemy->attack();
         if(damage>0){
@@ -622,10 +641,48 @@ void fight(Player* player){
                 cout<<"You've been defeated"<<endl
                     <<"Press enter to continue";
                 getchar();
-                command="..abort";
+                command="..end";
             }
         }
 
-        if(command=="..abort") break;
+        if(command=="..end") break;
     }
+}
+void saveToLeaderboard(const string& name){
+    string myLine;
+    ifstream myFile;
+    myFile.open("E:\\test\\leaderboard.txt");
+    vector<leaderboardStruct> leader;
+    bool isName=true;
+    leaderboardStruct next;
+    while(getline(myFile,myLine)){
+        char sign;
+        string score;
+        int flag=0;
+        for(char i : myLine){
+            if(i==' '){
+                flag=1;
+            }
+            if(flag==1){
+                score+=i;
+            }
+            else{
+                next.name+=i;
+            }
+        }
+        next.points=stoi(score);
+        leader.push_back(next);
+        next.name="";
+    }
+    myFile.close();
+    next.name=name;
+    next.points=scoreCount;
+    leader.push_back(next);
+    ofstream myWriteFile;
+    myWriteFile.open("E:\\test\\leaderboard.txt");
+    while(!leader.empty()){
+        myWriteFile<<leader.back().name<<" "<<leader.back().points<<"\n";
+        leader.pop_back();
+    }
+    myWriteFile.close();
 }
