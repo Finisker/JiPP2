@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <vector>
+#include <time.h>
 #include "Character.h"
 #include "Player.h"
 
@@ -25,14 +26,24 @@ void shop(Player* player);
 void fight(Player* player);
 
 using namespace std;
-int magic;
+
+int magic, difficulty, scoreCount=0;
 string command, className;
 vector<int> stats;
+string enemyNames[] = {"Snail","Squirrel","Squid","Bear","Goblin","Bandit","Pikachu",
+                      "Orc", "SO", "Big Ant", "Opossum", "Sleep Deprivation","Addiction",
+                      "Wolf", "Dragon", "Coffee Table"};
 
 int main(int argc, char *argv[]) {
+    if(argc>1){
+        difficulty=stoi(argv[1]);
+    }
+    else{
+        difficulty=1;
+    }
 
     menu();
-
+    if(command=="..end") return 0;
     string playerName;
     cout<<"Give us your name: ";
     getline(cin,playerName);
@@ -40,12 +51,20 @@ int main(int argc, char *argv[]) {
     player->setPlayerClass(className);
 
     play(player);
-
+    clear();
+    cout<<"Congratulations your score was "<<scoreCount<<endl
+    <<"Your score will be forever saved in a leaderboard";
     return 0;
 }
-
+/**
+ * Clears or make separators for different menus.
+ * For Windows command prompt use system("cls")
+ * For Linux or Clion use cout.
+ */
 void clear(){
     //system("cls");
+    cout<<"------------------------------------------------------------"<<endl;
+
 }
 void menu(){
     int flag=0;
@@ -58,7 +77,15 @@ void menu(){
         cout<<"4. Exit Game"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch(stoi(command)){
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 classMenu();
                 break;
@@ -70,30 +97,48 @@ void menu(){
                 break;
             case 4:
                 flag=1;
+                command="..end";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void options(){
-    while(true){
+    int flag=0;
+    while(flag==0){
         clear();
         cout<<"1. Option"<<endl;
         cout<<"2. Option"<<endl;
         cout<<"3. Back to menu"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        if(command=="1"|| command=="2"||command=="3"){
-            break;
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                flag=1;
+                break;
+            default:
+                break;
         }
     }
 }
 void leaderboard(){
     clear();
     cout<<"Leaderboard"<<endl;
-    cout<<"Press any enter to back to menu"<<endl;
+    cout<<"Press enter to continue";
     getchar();
 }
 void classMenu(){
@@ -109,7 +154,15 @@ void classMenu(){
         cout<<"6. Back to menu"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 classWarrior();
                 break;
@@ -131,7 +184,7 @@ void classMenu(){
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void classWarrior(){
@@ -150,7 +203,15 @@ void classWarrior(){
         cout<<"2. Choose Warrior"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 flag=1;
                 break;
@@ -166,12 +227,12 @@ void classWarrior(){
                 stats.push_back(5);
                 stats.push_back(50);
                 magic = 1;
-                command="abort";
+                command="..abort";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void classRouge(){
@@ -190,7 +251,15 @@ void classRouge(){
         cout<<"2. Choose Rouge"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 flag=1;
                 break;
@@ -206,12 +275,12 @@ void classRouge(){
                 stats.push_back(5);
                 stats.push_back(100);
                 magic = 1;
-                command="abort";
+                command="..abort";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void classPriest(){
@@ -230,7 +299,15 @@ void classPriest(){
         cout<<"2. Choose Priest"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 flag = 1;
                 break;
@@ -246,12 +323,12 @@ void classPriest(){
                 stats.push_back(5);
                 stats.push_back(50);
                 magic = 10;
-                command="abort";
+                command="..abort";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void classKnight(){
@@ -270,7 +347,15 @@ void classKnight(){
         cout<<"2. Choose Knight"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 flag = 1;
                 break;
@@ -286,12 +371,12 @@ void classKnight(){
                 stats.push_back(5);
                 stats.push_back(0);
                 magic = 5;
-                command="abort";
+                command="..abort";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
 void classStudent(){
@@ -307,10 +392,18 @@ void classStudent(){
         cout<<"HP: 30"<<endl;
         cout<<"Starting debt: -200"<<endl<<endl;
         cout<<"1. Back to class menu"<<endl;
-        cout<<"2. Choose Warrior"<<endl;
+        cout<<"2. Choose Student"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
                 flag=1;
                 break;
@@ -325,19 +418,18 @@ void classStudent(){
                 stats.push_back(1);
                 stats.push_back(5);
                 stats.push_back(-200);
-                stats = {80,80,10,5,5,1,1,5,50};
                 magic = 10;
-                command="abort";
+                command="..abort";
                 break;
             default:
                 break;
         }
-        if(command=="abort") break;
+        if(command=="..abort") break;
     }
 }
+
 void play(Player* player){
-    int flag=0;
-    while(flag==0) {
+    while(true) {
         clear();
         cout<<"1. Fight enemy"<<endl;
         cout<<"2. Show your character"<<endl;
@@ -345,8 +437,17 @@ void play(Player* player){
         cout<<"4. Give up"<<endl;
         cout<<"command number: ";
         getline(cin,command);
-        switch (stoi(command)) {
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
             case 1:
+                fight(player);
                 break;
             case 2:
                 showPlayer(player);
@@ -355,9 +456,12 @@ void play(Player* player){
                 shop(player);
                 break;
             case 4:
-                flag=1;
+                command="..abort";
+                break;
+            default:
                 break;
         }
+        if(command=="..abort") break;
     }
 
 
@@ -372,12 +476,14 @@ void showPlayer(Player* player){
         cout<<"Luck: "<<player->getLuck()<<endl;
         cout<<"Magic: "<<player->getMagic()<<endl;
         cout<<"HP: "<<player->getCurrentHP()<<"/"<<player->getMaxHP()<<endl;
-        cout<<"Gold: "<<player->getGold()<<endl<<endl;
-        cout<<"Press any enter to back"<<endl;
+        cout<<"Gold: "<<player->getGold()<<endl;
+        cout<<"Score: "<<scoreCount<<endl<<endl;
+        cout<<"Press enter to continue";
         getchar();
 }
 void shop(Player* player){
-    while(true){
+    int flag=0;
+    while(flag==0){
         clear();
         cout<<"For 100 gold buy:"<<endl;
         cout<<"1. 1 Strength"<<endl;
@@ -398,35 +504,128 @@ void shop(Player* player){
 
         cout<<"command number: ";
         getline(cin,command);
-            switch (stoi(command)){
-                case 1:
-                    player->setStrength(player->getStrength()+1);
-                    break;
-                case 2:
-                    player->setDexterity(player->getDexterity()+1);
-                    break;
-                case 3:
-                    player->setDefense(player->getDefense()+1);
-                    break;
-                case 4:
-                    player->setLuck(player->getLuck()+1);
-                    break;
-                case 5:
-                    player->setMagic(player->getMagic()+1);
-                    break;
-                case 6:
-                    player->setMaxHP(player->getMaxHP()+10);
-                    break;
-                case 7:
-                    player->setCurrentHP(player->getMaxHP());
-                    break;
-                default:
-                    break;
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+
+        switch(comm){
+            case 1:
+                player->setStrength(player->getStrength()+1);
+                break;
+            case 2:
+                player->setDexterity(player->getDexterity()+1);
+                break;
+            case 3:
+                player->setDefense(player->getDefense()+1);
+                break;
+            case 4:
+                player->setLuck(player->getLuck()+1);
+                break;
+            case 5:
+                player->setMagic(player->getMagic()+1);
+                break;
+            case 6:
+                player->setMaxHP(player->getMaxHP()+10);
+                break;
+            case 7:
+                player->setCurrentHP(player->getMaxHP());
+                break;
+            case 8:
+                flag=1;
+                break;
+            default:
+                break;
         }
         player->setGold(player->getGold()-100);
-        break;
     }
 }
 void fight(Player* player){
+    srand(time(nullptr));
+    string name=enemyNames[rand()%enemyNames->size()];
+    int modifier = (difficulty*(scoreCount/10)+1);
+    int maxHP=(rand()%30 + 20)*modifier;
+    int strength=(rand()%15)*modifier;
+    int dexterity=(rand()%15)*modifier;
+    int defense=(rand()%5)*modifier;
+    int luck=(rand()%15)*modifier;
+    int minDmg=(rand()%5)*modifier;
+    int maxDmg=(rand()%5+minDmg)*modifier;
+    int gold=(rand()%30 + 20)*modifier;
 
+    vector<int> enemyStats;
+    enemyStats.push_back(maxHP);
+    enemyStats.push_back(maxHP);
+    enemyStats.push_back(strength);
+    enemyStats.push_back(dexterity);
+    enemyStats.push_back(defense);
+    enemyStats.push_back(luck);
+    enemyStats.push_back(minDmg);
+    enemyStats.push_back(maxDmg);
+    enemyStats.push_back(gold);
+
+    auto* enemy = new Character(name,enemyStats);
+
+    int flag=0;
+    while(flag==0) {
+        clear();
+        cout << "  " << player->getName() << "\t\t\t\t" << enemy->getName() << endl;
+        cout << player->getCurrentHP() << "/" << player->getMaxHP() << "\t\t\t" << enemy->getCurrentHP() << "/"
+             << enemy->getMaxHP() << endl;
+        cout<<"1. Attack"<<endl;
+        cout<<"2. Heal"<<endl;
+        cout<<"3. Give up"<<endl;
+        cout<<"command number: ";
+        getline(cin,command);
+        int comm;
+        try{
+            comm = stoi(command);
+        }
+        catch (const invalid_argument& e) {
+            continue;
+        }
+        int damage;
+        switch(comm){
+            case 1:
+                damage = player->attack();
+                if(damage>0){
+                    if(enemy->getHit(damage)){
+                        clear();
+                        cout<<"You've defeated an enemy"<<endl
+                        <<"Here is your "<<enemy->getGold()<<" gold"<<endl
+                        <<"Press enter to continue";
+                        flag=1;
+                        scoreCount++;
+                        player->setGold(player->getGold()+enemy->getGold());
+                        getchar();
+                    }
+                }
+                break;
+            case 2:
+                player->heal();
+                break;
+            case 3:
+                command="..abort";
+                break;
+            default:
+                break;
+        }
+        if(command=="..abort") break;
+
+        damage = enemy->attack();
+        if(damage>0){
+            if(player->getHit(damage)){
+                clear();
+                cout<<"You've been defeated"<<endl
+                    <<"Press enter to continue";
+                getchar();
+                command="..abort";
+            }
+        }
+
+        if(command=="..abort") break;
+    }
 }

@@ -17,7 +17,7 @@ void Player::die() {
 }
 
 void Player::heal() {
-    setCurrentHP(getCurrentHP() + getMaxHP() / 4);
+    this->setCurrentHP(this->getCurrentHP() + this->getMagic()*2);
 }
 
 Player::Player(string name,vector<int> statsVector, int magic) : Character(move(name),move(statsVector)) {

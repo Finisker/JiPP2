@@ -110,6 +110,7 @@ void Character::setMaxDmg(int newMaxDmg) {
 }
 
 int Character::criticalValue() const {
+    srand(time(nullptr));
     int tmp = rand() % 100;
     if (this->luck * 3 >= tmp) {
         return 3;
@@ -118,26 +119,28 @@ int Character::criticalValue() const {
 }
 
 int Character::attack() const {
-    if(!attackHit()){
+    if(!this->attackHit()){
         return 0;
     }
-
+    srand(time(nullptr));
     int damage = rand() % (this->maxDmg - this->minDmg + 1) + this->minDmg;
 
-    return (damage + this->strength) * criticalValue();
+    return (damage + this->strength*2) * this->criticalValue();
 }
 
 bool Character::attackHit() const {
+    srand(time(nullptr));
     int tmp = rand() % 100;
-    if (this->dexterity * 5 >= tmp) {
+    if (this->dexterity * 7 >= tmp) {
         return true;
     }
     return false;
 }
 
 bool Character::dodge() const {
+    srand(time(nullptr));
     int tmp = rand() % 100;
-    if (this->dexterity * 5 >= tmp) {
+    if (this->dexterity * 2 >= tmp) {
         return true;
     }
     return false;
@@ -145,7 +148,7 @@ bool Character::dodge() const {
 
 bool Character::getHit(int damage) {
     if(!dodge()){
-        int damageTaken = damage - defense;
+        int damageTaken = damage - defense/2;
         if(damageTaken>0){
             if(damageTaken>=this->currentHP){
                 return true;
