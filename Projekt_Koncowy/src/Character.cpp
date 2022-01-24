@@ -27,6 +27,7 @@ Character::Character(string name, vector<int> statsVector) {
     statsVector.pop_back();
     this->maxHP = statsVector.back();
     statsVector.pop_back();
+    iDontNeedThisOneButDestructorNeededToBeUsed = new int[15];
 }
 
 int Character::getMaxHP() const {
@@ -109,6 +110,10 @@ void Character::setMaxDmg(int newMaxDmg) {
     this->maxDmg = newMaxDmg;
 }
 
+void Character::setName(string newName) {
+    this->name = move(name);
+}
+
 int Character::criticalValue() const {
     srand(time(nullptr));
     int tmp = rand() % 100;
@@ -119,13 +124,13 @@ int Character::criticalValue() const {
 }
 
 int Character::attack() const {
-    if(!this->attackHit()){
+    if (!this->attackHit()) {
         return 0;
     }
     srand(time(nullptr));
     int damage = rand() % (this->maxDmg - this->minDmg + 1) + this->minDmg;
 
-    return (damage + this->strength*2) * this->criticalValue();
+    return (damage + this->strength * 2) * this->criticalValue();
 }
 
 bool Character::attackHit() const {
@@ -147,17 +152,44 @@ bool Character::dodge() const {
 }
 
 bool Character::getHit(int damage) {
-    if(!dodge()){
-        int damageTaken = damage - defense/2;
-        if(damageTaken>0){
-            if(damageTaken>=this->currentHP){
+    if (!dodge()) {
+        int damageTaken = damage - defense / 2;
+        if (damageTaken > 0) {
+            if (damageTaken >= this->currentHP) {
                 return true;
             }
-            this->currentHP-=damageTaken;
+            this->currentHP -= damageTaken;
         }
     }
     return false;
 }
+
+Character::~Character() {
+    delete[] this->iDontNeedThisOneButDestructorNeededToBeUsed;
+}
+
+bool Character::getHit(short damage) {
+    if (!dodge()) {
+        short damageTaken = damage - this->defense / 2;
+        if (damageTaken > 0) {
+            if (damageTaken >= this->currentHP) {
+                return true;
+            }
+            this->currentHP -= damageTaken;
+        }
+    }
+    return false;
+}
+
+bool Character::operator==(const Character &character) {
+    if (this->name == character.getName()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 
 
 

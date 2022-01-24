@@ -6,4 +6,4 @@ project(Koncowy)
 
 include_directories(include)
 
-add_executable(Koncowy src/main.cpp src/Character.cpp include/Character.h src/Player.cpp include/Player.h src/Enemy.cpp include/Enemy.h)
+add_executable(Koncowy src/main.cpp src/Character.cpp include/Character.h src/Player.cpp include/Player.h src/EliteEnemy.cpp include/EliteEnemy.h)

@@ -12,15 +12,11 @@ void Player::setMagic(int newMagic) {
     this->magic = newMagic;
 }
 
-void Player::die() {
-    //Zjebałeś, spróbuj ponownie
-}
-
 void Player::heal() {
-    this->setCurrentHP(this->getCurrentHP() + this->getMagic()*2);
+    this->setCurrentHP(this->getCurrentHP() + this->getMagic() * 2);
 }
 
-Player::Player(string name,vector<int> statsVector, int magic) : Character(move(name),move(statsVector)) {
+Player::Player(string name, vector<int> statsVector, int magic) : Character(move(name), move(statsVector)) {
     this->magic = magic;
 }
 
@@ -29,5 +25,5 @@ string Player::getPlayerClass() const {
 }
 
 void Player::setPlayerClass(string newPlayerClass) {
-    this->playerClass=move(newPlayerClass);
+    this->playerClass = move(newPlayerClass);
 }

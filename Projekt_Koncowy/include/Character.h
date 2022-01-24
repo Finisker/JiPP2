@@ -23,13 +23,20 @@ private:
     int minDmg;
     int maxDmg;
     int gold;
+    int *iDontNeedThisOneButDestructorNeededToBeUsed;
 
 public:
 /**
  * Constructor for Character class
+ * @param name - name of a Character class object
  * @param statArray array of 9 int elements representing each field of a Character class
  */
     Character(string name, vector<int> statsVector);
+
+/**
+ * Destructor for Character class, deletes iDontNeedThisOneButDestructorNeededToBeUsed
+ */
+    ~Character();
 
 /**
  * Standard getters
@@ -57,6 +64,8 @@ public:
 /**
  * Standard setters
  */
+    void setName(string newName);
+
     void setMaxHP(int newMaxHP);
 
     void setStrength(int newStrength);
@@ -74,15 +83,16 @@ public:
     void setMaxDmg(int newMaxDmg);
 
 /**
- * Standard setter but makes sure currentHP<=maxHP and checks for death
+ * Standard setter but makes sure currentHP<=maxHP
  */
     void setCurrentHP(int newCurrentHP);
 
 /**
- * Checks for isCritical hit
- * @return critical multiplier
+ * Checks for critical hit
+ * @return critical multiplier, times 1 or times 3
  */
-    int criticalValue() const;
+    virtual int criticalValue() const;
+
 /**
  * Checks if attack hit
  * @return true for hit, false for miss
@@ -94,6 +104,7 @@ public:
  * @return amount of damage taken by player
  */
     int attack() const;
+
 /**
  * Checks if attack was dodged
  * @return true for dodge, false for hit
@@ -106,6 +117,15 @@ public:
  * @return true if character died after attack
  */
     bool getHit(int damage);
+
+    bool getHit(short damage);
+
+/**
+ * Checks if two objects of Character class have the same name
+ * @param character - second Character class object
+ * @return true for the same name, false for different
+ */
+    bool operator==(const Character &character);
 };
 
 
