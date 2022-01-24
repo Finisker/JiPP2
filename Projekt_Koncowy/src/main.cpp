@@ -52,15 +52,21 @@ struct leaderboardStruct {
 };
 
 int magic, difficulty, scoreCount = 0;
-string command, className, filePath="leaderboard.txt";
+string command, className, filePath = "leaderboard.txt";
 vector<int> stats;
 string enemyNames[] = {"Snail", "Squirrel", "Squid", "Bear", "Goblin", "Bandit", "Pikachu",
                        "Orc", "SO", "Big Ant", "Opossum", "Sleep Deprivation", "Addiction",
                        "Wolf", "Dragon", "Coffee Table"};
 
 int main(int argc, char *argv[]) {
+
     if (argc > 1) {
-        difficulty = stoi(argv[1]);
+        try {
+            difficulty = stoi(argv[1]);
+        }
+        catch (const invalid_argument &e) {
+            difficulty = 1;
+        }
     } else {
         difficulty = 1;
     }
@@ -181,7 +187,7 @@ void leaderboard() {
     cout << "Name Score" << endl;
     string myLine;
     ifstream myFile(filePath);
-    if(!myFile.is_open()){
+    if (!myFile.is_open()) {
         cout << "Press enter to continue";
         getchar();
         return;
@@ -732,7 +738,7 @@ void saveToLeaderboard(const string &name) {
     leaderboardStruct<int> next;
     myFile.open(filePath);
 
-    if(myFile.is_open()){
+    if (myFile.is_open()) {
         while (getline(myFile, myLine)) {
             string score;
             int flag = 0;
